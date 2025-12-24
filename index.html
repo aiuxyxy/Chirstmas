@@ -782,16 +782,11 @@
                 isCameraRunning = true;
             } catch(e) {
                 console.warn("Camera error:", e);
-                let msg = "摄像头错误: " + e.name;
-                if (e.name === 'NotAllowedError' || e.name === 'PermissionDeniedError') {
-                    msg = "请允许访问摄像头！";
-                } else if (window.location.protocol !== 'https:' && window.location.hostname !== 'localhost') {
-                    msg = "安全限制：请通过本地服务器或HTTPS访问 (勿直接打开文件)";
-                    alert("【重要提示】\n浏览器安全策略禁止在本地文件模式下访问摄像头。\n\n解决方法：\n1. 请发送者将其部署到网页服务器 (如 GitHub Pages)。\n2. 或者在本地启动 HTTP 服务器 (localhost) 访问。");
-                }
-                debugInfo.innerText = msg; 
-                showMsg(msg);
-                camBtn.innerText = "重试摄像头";
+                let msg = "Camera Error: " + e.name;
+                if (e.name === 'NotAllowedError' || e.name === 'PermissionDeniedError') msg = "Please allow camera access!";
+                else if (window.location.protocol !== 'https:' && window.location.hostname !== 'localhost') msg = "HTTPS required for camera!";
+                debugInfo.innerText = msg; showMsg(msg);
+                camBtn.innerText = "Retry Camera";
             }
         }
 
